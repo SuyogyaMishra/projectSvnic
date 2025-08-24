@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bright Future Academy - Excellence in Education (NUR-12)</title>
+    <title>SVNIC- Excellence in Education (NUR-12)</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
             <a class="navbar-brand fw-bold text-primary" href="#">
                 <i class="bi bi-mortarboard-fill me-2"></i>
-                Bright Future Academy
-            </a>
+                Swami Vivekanand Inter College </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -48,23 +49,23 @@
         <div class="container">
             <div class="row min-vh-100 align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold text-primary mb-4">Welcome to Bright Future Academy</h1>
-                    <p class="lead mb-4">Nurturing young minds from Nursery to Grade 12 with excellence, compassion, and innovation. Building tomorrow's leaders today.</p>
+                    <h1 class="display-4 fw-bold text-primary mb-4">{{ $content->HeroTitle }}</h1>
+                    <p class="lead mb-4">{{ $content->Hero_Description  }}</p>
                     <div class="d-flex flex-wrap gap-3">
                         <a href="#admissions" class="btn btn-primary btn-lg">Apply Now</a>
                         <a href="#about" class="btn btn-outline-primary btn-lg">Learn More</a>
                     </div>
                     <div class="mt-4 d-flex align-items-center">
                         <div class="me-4">
-                            <h5 class="fw-bold text-primary mb-0">25+</h5>
+                            <h5 class="fw-bold text-primary mb-0">{{ $content->Years }}</h5>
                             <small class="text-muted">Years of Excellence</small>
                         </div>
                         <div class="me-4">
-                            <h5 class="fw-bold text-primary mb-0">1200+</h5>
+                            <h5 class="fw-bold text-primary mb-0">{{ $content->Years }}+</h5>
                             <small class="text-muted">Happy Students</small>
                         </div>
                         <div>
-                            <h5 class="fw-bold text-primary mb-0">95%</h5>
+                            <h5 class="fw-bold text-primary mb-0">{{ $content->Success }}</h5>
                             <small class="text-muted">University Acceptance</small>
                         </div>
                     </div>
@@ -82,15 +83,16 @@
             <div class="row mb-5">
                 <div class="col-lg-8 mx-auto text-center">
                     <h2 class="display-5 fw-bold text-primary mb-3">About Our School</h2>
-                    <p class="lead text-muted">Established in 1999, Bright Future Academy has been a beacon of educational excellence, fostering holistic development and academic achievement.</p>
+                    <p class="lead text-muted">Established in 90's, Swami Vivekanand Inter College
+                        has been a beacon of educational excellence, fostering holistic development and academic achievement.</p>
                 </div>
             </div>
             <div class="row align-items-center mb-5">
                 <div class="col-lg-6">
                     <h3 class="fw-bold mb-3">Our Mission</h3>
-                    <p class="mb-4">To provide quality education that empowers students to become confident, creative, and compassionate global citizens. We believe in nurturing not just academic excellence but also character development and life skills.</p>
+                    <p class="mb-4">{{ $content->Mission_Statement }}</p>
                     <h3 class="fw-bold mb-3">Our Vision</h3>
-                    <p class="mb-4">To be a leading educational institution that inspires lifelong learning, critical thinking, and social responsibility while preparing students for success in an ever-changing world.</p>
+                    <p class="mb-4">{{ $content->Vision_Statement }}</p>
                 </div>
                 <div class="col-lg-6">
                     <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Students Learning" class="img-fluid rounded-3 shadow">
@@ -184,7 +186,6 @@
                             <ul class="list-unstyled text-start small">
                                 <li><i class="bi bi-check-circle text-success me-2"></i>Advanced Mathematics</li>
                                 <li><i class="bi bi-check-circle text-success me-2"></i>Science Laboratory</li>
-                                <li><i class="bi bi-check-circle text-success me-2"></i>Foreign Languages</li>
                                 <li><i class="bi bi-check-circle text-success me-2"></i>Project-Based Learning</li>
                             </ul>
                         </div>
@@ -199,7 +200,6 @@
                             <h5 class="fw-bold">High School (9-10)</h5>
                             <p class="text-muted mb-3">Board examination preparation with comprehensive subject coverage and career guidance.</p>
                             <ul class="list-unstyled text-start small">
-                                <li><i class="bi bi-check-circle text-success me-2"></i>CBSE Curriculum</li>
                                 <li><i class="bi bi-check-circle text-success me-2"></i>Career Counseling</li>
                                 <li><i class="bi bi-check-circle text-success me-2"></i>Mock Examinations</li>
                             </ul>
@@ -215,7 +215,7 @@
                             <h5 class="fw-bold">Senior Secondary (11-12)</h5>
                             <p class="text-muted mb-3">Stream specialization with Science, Commerce, and Arts options for university preparation.</p>
                             <ul class="list-unstyled text-start small">
-                                <li><i class="bi bi-check-circle text-success me-2"></i>PCM/PCB/Commerce/Arts</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>PCM/PCB</li>
                                 <li><i class="bi bi-check-circle text-success me-2"></i>Entrance Exam Coaching</li>
                                 <li><i class="bi bi-check-circle text-success me-2"></i>University Guidance</li>
                             </ul>
@@ -381,6 +381,35 @@
                 </div>
             </div>
             <div class="row">
+
+                @foreach($events as $event)
+                <div class="col-lg-4 mb-4">
+                    <div class="card border-0 shadow h-100">
+                        {{-- Event Image --}}
+                        @if($event->file && $event->file->file_path)
+                        <img src="{{ asset('storage/' . $event->file->file_path) }}" class="card-img-top" alt="{{ $event->title }}">
+                        @else
+                        <img src="https://via.placeholder.com/600x400?text=No+Image" class="card-img-top" alt="No Image">
+                        @endif
+
+                        <div class="card-body">
+                            {{-- Event Date --}}
+                            <span class="badge bg-primary mb-2">{{ \Carbon\Carbon::parse($event->event_date)->format('M d, Y') }}</span>
+
+                            {{-- Event Title --}}
+                            <h5 class="fw-bold">{{ $event->title }}</h5>
+
+                            {{-- Event Description --}}
+                            <p class="text-muted">{{ Str::limit($event->description, 120) }}</p>
+
+                            {{-- Read More link --}}
+                            <a href="" class="btn btn-outline-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+
                 <div class="col-lg-4 mb-4">
                     <div class="card border-0 shadow h-100">
                         <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="card-img-top" alt="Science Fair">
@@ -435,7 +464,7 @@
                                 <i class="bi bi-geo-alt-fill text-primary display-6"></i>
                             </div>
                             <h6 class="fw-bold">Address</h6>
-                            <p class="text-muted small">123 Education Avenue<br>Learning District<br>City, State 123456</p>
+                            <p class="text-muted small">Near Sai Baba Mandir ,Bhinga Road ,Ikauna<br>Shrawasti<br> UP 271845</p>
                         </div>
                         <div class="col-md-4 mb-4 text-center">
                             <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
@@ -496,7 +525,7 @@
                 <div class="col-lg-4 mb-4">
                     <h5 class="fw-bold mb-3">
                         <i class="bi bi-mortarboard-fill me-2"></i>
-                        Bright Future Academy
+                        Swami Vivekanand Inter College
                     </h5>
                     <p class="text-light opacity-75 mb-3">Nurturing young minds and building tomorrow's leaders through excellence in education from Nursery to Grade 12.</p>
                     <div class="d-flex">
@@ -519,18 +548,18 @@
                 <div class="col-lg-3 mb-4">
                     <h6 class="fw-bold mb-3">Academic Programs</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-light opacity-75 text-decoration-none">Early Childhood</a></li>
-                        <li><a href="#" class="text-light opacity-75 text-decoration-none">Primary School</a></li>
-                        <li><a href="#" class="text-light opacity-75 text-decoration-none">Middle School</a></li>
-                        <li><a href="#" class="text-light opacity-75 text-decoration-none">High School</a></li>
-                        <li><a href="#" class="text-light opacity-75 text-decoration-none">Senior Secondary</a></li>
+                        <li><a href="earlychild" class="text-light opacity-75 text-decoration-none">Early Childhood</a></li>
+                        <li><a href="primary" class="text-light opacity-75 text-decoration-none">Primary School</a></li>
+                        <li><a href="middleschool" class="text-light opacity-75 text-decoration-none">Middle School</a></li>
+                        <li><a href="seniorschool" class="text-light opacity-75 text-decoration-none">High School</a></li>
+                        <li><a href="highschool" class="text-light opacity-75 text-decoration-none">Senior Secondary</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 mb-4">
                     <h6 class="fw-bold mb-3">Contact Info</h6>
                     <p class="text-light opacity-75 mb-2">
                         <i class="bi bi-geo-alt-fill me-2"></i>
-                        123 Education Avenue, Learning District
+                        Ikauna, Shrawasti
                     </p>
                     <p class="text-light opacity-75 mb-2">
                         <i class="bi bi-telephone-fill me-2"></i>
@@ -545,7 +574,8 @@
             <hr class="my-4 opacity-25">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="text-light opacity-75 mb-0">&copy; 2024 Bright Future Academy. All rights reserved.</p>
+                    <p class="text-light opacity-75 mb-0">&copy; 2024 Swami Vivekanand Inter College
+                        . All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <a href="#" class="text-light opacity-75 text-decoration-none me-3">Privacy Policy</a>
@@ -562,26 +592,27 @@
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             padding-top: 80px;
         }
-        
+
         .navbar {
             transition: all 0.3s ease;
         }
-        
+
         .card {
             transition: transform 0.2s ease;
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
         }
-        
+
         section {
             scroll-margin-top: 80px;
         }
-        
+
         .btn {
             transition: all 0.3s ease;
         }
     </style>
 </body>
+
 </html>
