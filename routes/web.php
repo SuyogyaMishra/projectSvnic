@@ -42,3 +42,5 @@ Route::post('/updateweb', [AdmindasboardController::class, 'updateweb'])->name('
 
 
 Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
+Route::post('/contact', [SchoolInfoController::class, 'contactDetails'])->name('contactInfo');
+

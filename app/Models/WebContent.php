@@ -24,5 +24,7 @@ class WebContent extends Model
         'Success',
         'Mission_Statement',
         'Vision_Statement',
+        'schoolPic'
+
     ];
 }

@@ -18,8 +18,6 @@ class EventController extends Controller
         ]);
 
         $file_id = null;
-
-        // Save file in files table
         if ($request->hasFile('event_image')) {
             $file = $request->file('event_image');
             $path = $file->store('uploads/events', 'public');

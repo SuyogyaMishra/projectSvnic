@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SchoolInfo;
 use App\Models\Event;
-
+use App\Models\Contact;
 class SchoolInfoController extends Controller
 {
     /**
@@ -38,5 +38,25 @@ class SchoolInfoController extends Controller
         ]);
 
         return back()->with('success', "Saved: {$request->students} students and {$request->teachers} teachers.");
+    }
+     public function contactDetails(Request $request)
+    {      
+        // ✅ Validation
+        $request->validate([
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        // ✅ Save data
+        Contact::create([
+            'name'    => $request->input('name'),
+            'email'   => $request->input('email'),
+            'subject' => $request->input('subject'),
+            'message' => $request->input('message'),
+        ]);
+
+        return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
 }
