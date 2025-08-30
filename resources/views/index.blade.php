@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="School Building" class="img-fluid rounded-3 shadow">
+                    <img src="{{ asset('storage/' . $content->schoolPic) }}" alt="School Building" class="img-fluid rounded-3 shadow">
                 </div>
             </div>
         </div>
@@ -484,20 +484,22 @@
                     <div class="card border-0 shadow">
                         <div class="card-body p-4">
                             <h5 class="fw-bold mb-3">Send us a Message</h5>
-                            <form>
+                            <form method="post" action="{{ route('contactInfo') }}">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="name" class="form-label">Full Name</label>
-                                        <input type="text" class="form-control" id="name" required>
+                                        <input type="text" class="form-control" name="name" id="name" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="email" class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" id="email" required>
+                                        <input type="email" class="form-control" name="email" id="email" required>
                                     </div>
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="subject" class="form-label">Subject</label>
-                                    <select class="form-select" id="subject" required>
+                                    <select class="form-select" name="subject" id="subject" required>
                                         <option value="">Choose...</option>
                                         <option value="admissions">Admissions Inquiry</option>
                                         <option value="general">General Information</option>
@@ -505,10 +507,12 @@
                                         <option value="other">Other</option>
                                     </select>
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="message" class="form-label">Message</label>
-                                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                                    <textarea class="form-control" name="message" id="message" rows="4" required></textarea>
                                 </div>
+
                                 <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
                             </form>
                         </div>
@@ -531,7 +535,7 @@
                     <div class="d-flex">
                         <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
                         <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="text-light me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.instagram.com/svnic_ikauna_shravasti/" class="text-light me-3"><i class="bi bi-instagram"></i></a>
                         <a href="#" class="text-light me-3"><i class="bi bi-youtube"></i></a>
                     </div>
                 </div>
@@ -563,11 +567,11 @@
                     </p>
                     <p class="text-light opacity-75 mb-2">
                         <i class="bi bi-telephone-fill me-2"></i>
-                        +91 98765 43210
+                        +91 6386369558
                     </p>
                     <p class="text-light opacity-75">
                         <i class="bi bi-envelope-fill me-2"></i>
-                        info@brightfuture.edu
+                        info@sm.edu
                     </p>
                 </div>
             </div>

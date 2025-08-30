@@ -12,7 +12,6 @@ class webContentController extends Controller
         // Get first row
         $content = WebContent::first();
         $events = Event::with('file')->get();
-
         return view('index', compact('content', 'events'));
     }
 

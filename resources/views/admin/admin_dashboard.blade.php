@@ -241,7 +241,7 @@
                                 <div class="card-header">
                                     <h5 class="mb-0">Homepage Content</h5>
                                 </div>
-                                <form id="webForm" action="{{ route("updateweb") }}" method="POST">
+                                <form id="webForm" action="{{ route("updateweb") }}" method="POST"  enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
                                         <div class="mb-3">
@@ -271,6 +271,10 @@
                                                     <input type="number" class="form-control" name="success" placeholder="Success %" value="95">
                                                     <small class="text-muted">Success %</small>
                                                 </div>
+                                                <div class="mb-3">
+                                                    <label for="schoolPic" class="form-label">Hero pic</label>
+                                                    <input type="file" class="form-control" id="schoolPic" name="schoolPic" placeholder="upload hero pic">
++                                                </div>
                                             </div>
                                         </div>
 
@@ -376,18 +380,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($contacts as $contact)
                                         <tr>
                                             <td><input type="checkbox" class="form-check-input"></td>
-                                            <td>John Smith</td>
-                                            <td>john@email.com</td>
-                                            <td>Admissions Inquiry</td>
-                                            <td>2023-12-10</td>
+                                            <td>{{  $contact->name }}</td>
+                                            <td>{{  $contact->email }}</td>
+                                            <td> {{  $contact->subject }} </td>
+                                            <td>{{  $contact->	created_at }}</td>
                                             <td><span class="badge bg-primary">New</span></td>
                                             <td>
                                                 <button class="btn btn-sm btn-outline-primary">View</button>
                                                 <button class="btn btn-sm btn-outline-success">Reply</button>
                                             </td>
                                         </tr>
+                                        @endforeach
                                         <tr>
                                             <td><input type="checkbox" class="form-check-input"></td>
                                             <td>Sarah Johnson</td>
