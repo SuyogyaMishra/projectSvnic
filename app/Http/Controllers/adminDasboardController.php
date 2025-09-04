@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\SchoolInfo;
 use App\Models\WebContent;
 use App\Models\Contact;
+use App\Models\Event;
+use App\Models\Admission;
+
 use Illuminate\Support\Facades\Storage;
 
 class AdmindasboardController extends Controller
@@ -19,8 +22,10 @@ class AdmindasboardController extends Controller
         // Always update the first record, or create if none exists
         $stat = SchoolInfo::first();
         $contacts= Contact::all();
-
-        return view('admin.admin_dashboard', compact('stat','contacts'));
+        $events = Event::with('file')->get();
+        $content = WebContent::first();
+        $admissions = Admission::latest()->get();
+        return view('admin.admin_dashboard', compact('stat','contacts','events','content','admissions'));
     }
 
 

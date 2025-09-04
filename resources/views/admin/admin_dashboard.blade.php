@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Bright Future Academy</title>
+    <title>Admin Dashboard - SVNIC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
 </head>
@@ -111,16 +111,16 @@
             </nav>
 
             <!-- Main Content -->
-            @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <!-- Dashboard Section -->
                 <div id="dashboard-section" class="content-section">
+                    @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">Dashboard</h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
@@ -136,7 +136,7 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body text-center">
                                     <i class="bi bi-people-fill text-primary display-4 mb-2"></i>
-                                    <h5 class="card-title">{{ $stat->Students}}</h5>
+                                    <h5 class="card-title">{{ $content->Student}}+</h5>
                                     <p class="card-text text-muted">Total Students</p>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body text-center">
                                     <i class="bi bi-envelope-fill text-warning display-4 mb-2"></i>
-                                    <h5 class="card-title">15</h5>
+                                    <h5 class="card-title">{{ $contacts->where('status', 1)->count() }}</h5>
                                     <p class="card-text text-muted">New Messages</p>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body text-center">
                                     <i class="bi bi-calendar-event-fill text-info display-4 mb-2"></i>
-                                    <h5 class="card-title">5</h5>
+                                    <h5 class="card-title">{{ $events->count() }}</h5>
                                     <p class="card-text text-muted">Upcoming Events</p>
                                 </div>
                             </div>
@@ -241,7 +241,7 @@
                                 <div class="card-header">
                                     <h5 class="mb-0">Homepage Content</h5>
                                 </div>
-                                <form id="webForm" action="{{ route("updateweb") }}" method="POST"  enctype="multipart/form-data">
+                                <form id="webForm" action="{{ route("updateweb") }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
                                         <div class="mb-3">
@@ -274,7 +274,8 @@
                                                 <div class="mb-3">
                                                     <label for="schoolPic" class="form-label">Hero pic</label>
                                                     <input type="file" class="form-control" id="schoolPic" name="schoolPic" placeholder="upload hero pic">
-+                                                </div>
+                                                    +
+                                                </div>
                                             </div>
                                         </div>
 
@@ -322,33 +323,25 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($events as $event)
                                 <tr>
-                                    <td>Annual Science Fair 2023</td>
-                                    <td>Dec 15, 2023</td>
+                                    <td>{{ $event->title }}</td>
+                                    <td>{{ $event->event_date }}</td>
                                     <td><span class="badge bg-success">Published</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
-                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        <button type="button"
+                                            class="btn btn-sm btn-outline-primary open-edit-modal"
+                                            data-id="{{ $event->id }}">
+                                            Edit
+                                        </button>
+                                        <form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Inter-House Sports Meet</td>
-                                    <td>Nov 28, 2023</td>
-                                    <td><span class="badge bg-success">Published</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
-                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Cultural Festival</td>
-                                    <td>Oct 30, 2023</td>
-                                    <td><span class="badge bg-warning">Draft</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
-                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -383,29 +376,35 @@
                                         @foreach($contacts as $contact)
                                         <tr>
                                             <td><input type="checkbox" class="form-check-input"></td>
-                                            <td>{{  $contact->name }}</td>
-                                            <td>{{  $contact->email }}</td>
-                                            <td> {{  $contact->subject }} </td>
-                                            <td>{{  $contact->	created_at }}</td>
-                                            <td><span class="badge bg-primary">New</span></td>
+                                            <td>{{ $contact->name }}</td>
+                                            <td>{{ $contact->email }}</td>
+                                            <td> {{ $contact->subject }} </td>
+                                            <td>{{ $contact->	created_at }}</td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                                @if ($contact->status === 1)
+                                                <span class="badge bg-primary">New</span>
+                                            </td>
+                                            @endif
+                                            @if ($contact->status === 2)
+                                            <span class="badge bg-success">Read</span></td>
+                                            @endif
+                                            @if ($contact->status === 3)
+                                            <span class="badge bg-success">Replied</span></td>
+                                            @endif
+
+                                            <td>
+                                                <button
+                                                    class="btn btn-sm btn-outline-primary open-contact-modal"
+                                                    data-id="{{ $contact->id }}"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#editModal">
+                                                    View
+                                                </button>
+
                                                 <button class="btn btn-sm btn-outline-success">Reply</button>
                                             </td>
                                         </tr>
                                         @endforeach
-                                        <tr>
-                                            <td><input type="checkbox" class="form-check-input"></td>
-                                            <td>Sarah Johnson</td>
-                                            <td>sarah@email.com</td>
-                                            <td>General Information</td>
-                                            <td>2023-12-09</td>
-                                            <td><span class="badge bg-secondary">Read</span></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-outline-primary">View</button>
-                                                <button class="btn btn-sm btn-outline-success">Reply</button>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -417,7 +416,72 @@
                 <div id="admissions-section" class="content-section" style="display: none;">
                     <h2>Admissions Management</h2>
                     <p>Manage admission applications and requirements.</p>
+
+                    @if($admissions->isEmpty())
+                    <div class="alert alert-info">No admission inquiries yet.</div>
+                    @else
+                    <div class="table-responsive mt-3">
+                        <table class="table table-striped table-bordered align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Sr.no</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>DOB</th>
+                                    <th>Gender</th>
+                                    <th>Class Applied</th>
+                                    <th>Stream</th>
+                                    <th>Address</th>
+                                    <th>Status</th>
+                                    <th>Submitted At</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($admissions as $index => $admission)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $admission->full_name }}</td>
+                                    <td>{{ $admission->email }}</td>
+                                    <td>{{ $admission->phone }}</td>
+                                    <td>{{ $admission->dob }}</td>
+                                    <td>{{ $admission->gender }}</td>
+                                    <td>{{ $admission->class_applied }}</td>
+                                    <td>{{ $admission->stream ?? '-' }}</td>
+                                    <td>{{ $admission->address }}</td>
+                                    <td>
+                                        @if ($admission->status === 1)
+                                        <span class="badge bg-primary">New</span>
+                                        @endif
+                                        @if ($admission->status === 2)
+                                        <span class="badge bg-success">In Review</span>
+                                        @endif
+                                        @if ($admission->status === 3)
+                                        <span class="badge bg-success">Accepted</span>
+                                        @endif
+                                        @if ($admission->status === 4)
+                                        <span class="badge bg-danger">Rejected</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $admission->created_at->format('d M Y, h:i A') }}</td>
+                                    <td>
+                                        <button
+                                            class="btn btn-sm btn-outline-primary open-admission-modal"
+                                            data-id="{{ $admission->id }}"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editModal">
+                                            View
+                                        </button>
+
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    @endif
                 </div>
+
 
                 <div id="gallery-section" class="content-section" style="display: none;">
                     <h2>Photo Gallery Management</h2>
@@ -433,6 +497,14 @@
     </div>
 
     <!-- Add Event Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="editModalContent">
+                <!-- Content will be loaded here via AJAX -->
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="addEventModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -459,17 +531,24 @@
                             <label for="eventImage" class="form-label">Event Image</label>
                             <input type="file" class="form-control" id="eventImage" name="event_image">
                         </div>
-                        <button type="submit" class="btn btn-primary">Save Event</button>
-                    </form>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Save Event</button>
+                    <button type="submit" class="btn btn-primary">Save Event</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Empty Modal Container for view message -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg"> {{-- use modal-lg or modal-sm as needed --}}
+            <div class="modal-content" id="editModalContent">
+                <!-- AJAX content will be injected here -->
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -487,7 +566,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="students" class="form-label">No. of Students</label>
-                            <input type="number" value="{{ $stat->Students }}" class="form-control" id="students" name="students" placeholder="Enter no. of students" required>
+                            <input type="number" value="{{ $content->Student }}" class="form-control" id="students" name="students" placeholder="Enter no. of students" required>
                         </div>
                         <div class="mb-3">
                             <label for="teachers" class="form-label">No. of Teachers</label>
@@ -504,9 +583,68 @@
 
             </div>
         </div>
+        <!-- Admission View / Edit Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Admission Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form method="POST" action="">
+                        @csrf
+                        <input type="hidden" name="id" id="admissionId">
+
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" id="admissionName" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" id="admissionEmail" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Phone</label>
+                                    <input type="text" id="admissionPhone" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Class Applied</label>
+                                    <input type="text" id="admissionClass" class="form-control" readonly>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Address</label>
+                                    <textarea id="admissionAddress" class="form-control" rows="2" readonly></textarea>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-select" name="status" id="admissionStatus" required>
+                                        <option value="1">New</option>
+                                        <option value="2">In Review</option>
+                                        <option value="3">Accepted</option>
+                                        <option value="4">Rejected</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Update Status</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // Check if user is logged in
         window.addEventListener('load', function() {
@@ -583,6 +721,53 @@
             });
         });
     </script>
+    <script>
+        // Notification area for AJAX errors
+        $('<div id="ajaxError" class="alert alert-danger" style="display:none;position:fixed;top:70px;right:30px;z-index:9999;"></div>').appendTo('body');
+
+        $(document).on('click', '.open-edit-modal', function() {
+            var modelId = $(this).data('id');
+            $.ajax({
+                url: '{{ route("model.edit", ":id") }}'.replace(':id', modelId),
+                type: 'GET',
+                success: function(response) {
+                    $('#editModalContent').html(response);
+                    $('#editModal').modal('show');
+                },
+                error: function(xhr) {
+                    $('#ajaxError').text('Failed to load the form. Please try again.').fadeIn();
+                    setTimeout(function() {
+                        $('#ajaxError').fadeOut();
+                    }, 4000);
+                }
+            });
+        });
+    </script>
+    <script>
+        // One-time error container
+        if (!document.getElementById('ajaxError')) {
+            $('<div id="ajaxError" class="alert alert-danger" style="display:none;position:fixed;top:70px;right:30px;z-index:9999;"></div>').appendTo('body');
+        }
+
+        $(document).on('click', '.open-contact-modal', function() {
+            var modelId = $(this).data('id');
+
+            $.ajax({
+                url: '{{ route("contacts.view", ":id") }}'.replace(':id', modelId),
+                type: 'GET',
+                success: function(response) {
+                    $('#editModalContent').html(response);
+                    $('#editModal').modal('show');
+                },
+                error: function() {
+                    $('#ajaxError').text('Failed to load contact details.').fadeIn();
+                    setTimeout(() => $('#ajaxError').fadeOut(), 4000);
+                }
+            });
+        });
+    </script>
+
+
 
     <style>
         .sidebar {

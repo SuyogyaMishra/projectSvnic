@@ -45,7 +45,28 @@
     </nav>
 
     <!-- Hero Section -->
+
+
     <section id="home" class="hero-section">
+
+        @if(session('msg'))
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('msg') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        @if($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul class="mb-0">
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
         <div class="container">
             <div class="row min-vh-100 align-items-center">
                 <div class="col-lg-6">
@@ -61,7 +82,7 @@
                             <small class="text-muted">Years of Excellence</small>
                         </div>
                         <div class="me-4">
-                            <h5 class="fw-bold text-primary mb-0">{{ $content->Years }}+</h5>
+                            <h5 class="fw-bold text-primary mb-0">{{ $content->Student }}+</h5>
                             <small class="text-muted">Happy Students</small>
                         </div>
                         <div>
@@ -330,7 +351,13 @@
                             <p class="text-muted small">Complete admission formalities and join our family</p>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-lg">Download Application Form</button>
+                    <button
+                        class="btn btn-primary btn-lg open-admission-form"
+                        data-bs-toggle="modal"
+                        data-bs-target="#admissionModal">
+                        Apply For Admission
+                    </button>
+
                 </div>
                 <div class="col-lg-6">
                     <div class="card border-0 shadow">
@@ -588,7 +615,17 @@
             </div>
         </div>
     </footer>
+    <!-- Modal Container for addmisiion form -->
+    <div class="modal fade" id="admissionModal" tabindex="-1" aria-labelledby="admissionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="admissionModalContent">
+                <!-- AJAX form content will load here -->
+            </div>
+        </div>
+    </div>
 
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
@@ -618,5 +655,27 @@
         }
     </style>
 </body>
+<script>
+    $(document).on('click', '.open-admission-form', function() {
+
+        $.ajax({
+            url: '{{ route("showform") }}',
+            type: 'GET',
+            success: function(response) {
+                $('#admissionModalContent').html(response);
+                $('#admissionModal').modal('show');
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Admission form load error:', textStatus, errorThrown);
+                $('#admissionModalContent').html(
+                    '<div class="alert alert-danger" role="alert">' +
+                    'Sorry, we could not load the admission form at this time. Please try again later.' +
+                    '</div>'
+                );
+            }
+        });
+    });
+</script>
+
 
 </html>
