@@ -24,7 +24,7 @@ class AdmindasboardController extends Controller
         $contacts= Contact::all();
         $events = Event::with('file')->get();
         $content = WebContent::first();
-        $admissions = Admission::latest()->get();
+        $admissions = Admission::whereIn('status', [1, 2])->get();
         return view('admin.admin_dashboard', compact('stat','contacts','events','content','admissions'));
     }
 

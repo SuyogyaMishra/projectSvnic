@@ -102,5 +102,25 @@ class SchoolInfoController extends Controller
 
         return redirect()->back()->with(['msg' => 'Admission Request Submitted Successfully!']);
     }
+    public function admissionView($id){
+        $admission = Admission::findOrFail($id);
+        return view('admin.admin_admission',compact('admission'));
+    }
+    public function admissionUpdate(Request $request){
+        $request->validate([
+            'admission_id' => 'required|exists:admissions_table,id',
+            'status' => 'required|in:1,2,3,4', // Assuming status can be 1, 2, 3, or 4
+        ]);
+
+        $admission = Admission::findOrFail($request->admission_id);
+        $admission->status = $request->status;
+        $admission->save();
+
+        return redirect()->back()->with('success', 'Admission status updated successfully.');
+    }
+    public function finalAdmissionstatus(){
+        $admissions = Admission::whereIn('status', [3, 4])->get();
+        return view('admin.final_admission',compact('admissions'));
+    }
 
 }

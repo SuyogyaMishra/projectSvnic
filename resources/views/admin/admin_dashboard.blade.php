@@ -416,6 +416,11 @@
                 <div id="admissions-section" class="content-section" style="display: none;">
                     <h2>Admissions Management</h2>
                     <p>Manage admission applications and requirements.</p>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#admissionListModal">
+                            View Accepted / Rejected Admissions  
+                        </button>
+                    </div>
 
                     @if($admissions->isEmpty())
                     <div class="alert alert-info">No admission inquiries yet.</div>
@@ -470,9 +475,10 @@
                                             class="btn btn-sm btn-outline-primary open-admission-modal"
                                             data-id="{{ $admission->id }}"
                                             data-bs-toggle="modal"
-                                            data-bs-target="#editModal">
-                                            View
+                                            data-bs-target="#admission">
+                                            View Admission
                                         </button>
+                                    </td>
 
                                 </tr>
                                 @endforeach
@@ -583,66 +589,37 @@
 
             </div>
         </div>
-        <!-- Admission View / Edit Modal -->
-        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
+    </div>
+    <!-- Admission View / Edit Modal (moved outside other modals) -->
+    <div class="modal fade" id="admission" tabindex="-1" aria-labelledby="admissionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" id="admissionModalContent">
+                <!-- AJAX content will be injected here -->
+                <div class="text-center p-3">Loading...</div>
 
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Admission Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- Button to open modal -->
 
-                    <form method="POST" action="">
-                        @csrf
-                        <input type="hidden" name="id" id="admissionId">
 
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Full Name</label>
-                                    <input type="text" id="admissionName" class="form-control" readonly>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Email</label>
-                                    <input type="text" id="admissionEmail" class="form-control" readonly>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Phone</label>
-                                    <input type="text" id="admissionPhone" class="form-control" readonly>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Class Applied</label>
-                                    <input type="text" id="admissionClass" class="form-control" readonly>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Address</label>
-                                    <textarea id="admissionAddress" class="form-control" rows="2" readonly></textarea>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Status</label>
-                                    <select class="form-select" name="status" id="admissionStatus" required>
-                                        <option value="1">New</option>
-                                        <option value="2">In Review</option>
-                                        <option value="3">Accepted</option>
-                                        <option value="4">Rejected</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Update Status</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </form>
-
+    <!-- Modal -->
+    <div class="modal fade" id="admissionListModal" tabindex="-1" aria-labelledby="admissionListModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="admissionListModalLabel">Admission Inquiries</h5>
+                    <button type="button" class="btn-close text-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="admissionListContent">
+                    <!-- Admission list will be loaded here -->
+                    <div class="text-center p-3">Loading...</div>
                 </div>
             </div>
         </div>
-
     </div>
 
+    <!-- jQuery + AJAX logic -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -762,6 +739,40 @@
                 error: function() {
                     $('#ajaxError').text('Failed to load contact details.').fadeIn();
                     setTimeout(() => $('#ajaxError').fadeOut(), 4000);
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).on('click', '.open-admission-modal', function() {
+            var admissionId = $(this).data('id');
+            $.ajax({
+                url: '{{ route("admissions.view", ":id") }}'.replace(':id', admissionId),
+                type: 'GET',
+                success: function(response) {
+                    $('#admissionModalContent').html(response);
+                    $('#admission').modal('show');
+                },
+                error: function() {
+                    $('#ajaxError').text('Failed to load admission details.').fadeIn();
+                    setTimeout(() => $('#ajaxError').fadeOut(), 4000);
+                }
+            });
+        });
+    </script>
+    <script>
+        // When modal is shown, load data via AJAX
+        $('#admissionListModal').on('show.bs.modal', function() {
+            $('#admissionListContent').html('<div class="text-center p-3">Loading...</div>');
+
+            $.ajax({
+                url: '{{  route("addmission.final")}}', // <-- Your backend PHP/route
+                method: 'GET',
+                success: function(response) {
+                    $('#admissionListContent').html(response);
+                },
+                error: function() {
+                    $('#admissionListContent').html('<div class="alert alert-danger">Failed to load data.</div>');
                 }
             });
         });

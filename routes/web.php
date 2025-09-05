@@ -57,4 +57,8 @@ Route::get('showform', function () {
 })->name('showform');
 //route to store admission form data
 Route::post('/admissions', [SchoolInfoController::class, 'admissionRecord'])->name('admissions');
+Route::get('/admissions/{id}', [SchoolInfoController::class, 'admissionView'])->name('admissions.view');
+Route::post('/admissionsUpdate', [SchoolInfoController::class, 'admissionUpdate'])->name('admin.updateAdmission');
+Route::get('/addmission.final', [SchoolInfoController::class, 'finalAdmissionstatus'])->name('addmission.final');
+
 
