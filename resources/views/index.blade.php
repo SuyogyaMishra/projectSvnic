@@ -434,42 +434,7 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
-
-
-                <div class="col-lg-4 mb-4">
-                    <div class="card border-0 shadow h-100">
-                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="card-img-top" alt="Science Fair">
-                        <div class="card-body">
-                            <span class="badge bg-primary mb-2">Dec 15, 2023</span>
-                            <h5 class="fw-bold">Annual Science Fair 2023</h5>
-                            <p class="text-muted">Students showcase innovative projects and scientific discoveries in our annual science exhibition.</p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="card border-0 shadow h-100">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="card-img-top" alt="Sports Day">
-                        <div class="card-body">
-                            <span class="badge bg-success mb-2">Nov 28, 2023</span>
-                            <h5 class="fw-bold">Inter-House Sports Meet</h5>
-                            <p class="text-muted">A day of athletic excellence as students compete in various sports events and team competitions.</p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <div class="card border-0 shadow h-100">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="card-img-top" alt="Cultural Program">
-                        <div class="card-body">
-                            <span class="badge bg-warning mb-2">Oct 30, 2023</span>
-                            <h5 class="fw-bold">Cultural Festival</h5>
-                            <p class="text-muted">Students celebrate diversity through music, dance, drama, and art in our annual cultural extravaganza.</p>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach 
             </div>
         </div>
     </section>

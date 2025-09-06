@@ -163,8 +163,11 @@
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-body text-center">
                                     <i class="bi bi-calendar-event-fill text-info display-4 mb-2"></i>
-                                    <h5 class="card-title">{{ $events->count() }}</h5>
+                                    <h5 class="card-title">
+                                        {{ $events->filter(fn($event) => \Carbon\Carbon::parse($event->event_date)->isFuture())->count() }}
+                                    </h5>
                                     <p class="card-text text-muted">Upcoming Events</p>
+
                                 </div>
                             </div>
                         </div>
@@ -174,35 +177,43 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="card border-0 shadow-sm">
-                                <div class="card-header bg-white">
-                                    <h5 class="card-title mb-0">Recent Activity</h5>
-                                </div>
                                 <div class="card-body">
                                     <div class="list-group list-group-flush">
+                                        {{-- Latest Admissions --}}
+                                        @foreach($admissions->take(2)->where('status',1) as $admission)
                                         <div class="list-group-item d-flex align-items-center">
                                             <i class="bi bi-person-plus text-success me-3"></i>
                                             <div>
                                                 <h6 class="mb-1">New admission inquiry</h6>
-                                                <p class="mb-1 text-muted small">John Doe applied for Grade 5</p>
-                                                <small class="text-muted">2 hours ago</small>
+                                                <p class="mb-1 text-muted small">{{ $admission->full_name }} applied for {{ $admission->class_applied }}</p>
+                                                <small class="text-muted">{{ $admission->created_at->diffForHumans() }}</small>
                                             </div>
                                         </div>
+                                        @endforeach
+
+                                        {{-- Latest Contacts --}}
+                                        @foreach($contacts->where('status',1) as $contact)
                                         <div class="list-group-item d-flex align-items-center">
                                             <i class="bi bi-envelope text-primary me-3"></i>
                                             <div>
                                                 <h6 class="mb-1">Contact form submission</h6>
-                                                <p class="mb-1 text-muted small">Parent inquiry about school fees</p>
-                                                <small class="text-muted">4 hours ago</small>
+                                                <p class="mb-1 text-muted small">{{ $contact->name }} asked about "{{ $contact->subject }}"</p>
+                                                <small class="text-muted">{{ $contact->created_at->diffForHumans() }}</small>
                                             </div>
                                         </div>
+                                        @endforeach
+
+                                        {{-- Latest Events --}}
+                                        @foreach($events->filter(fn($event) => \Carbon\Carbon::parse($event->event_date)->isFuture())->take(2) as $event)
                                         <div class="list-group-item d-flex align-items-center">
                                             <i class="bi bi-calendar-event text-warning me-3"></i>
                                             <div>
                                                 <h6 class="mb-1">Event published</h6>
-                                                <p class="mb-1 text-muted small">Annual Sports Day 2024 added</p>
-                                                <small class="text-muted">1 day ago</small>
+                                                <p class="mb-1 text-muted small">{{ $event->title }} ({{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }})</p>
+                                                <small class="text-muted">{{ $event->created_at->diffForHumans() }}</small>
                                             </div>
                                         </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -327,7 +338,13 @@
                                 <tr>
                                     <td>{{ $event->title }}</td>
                                     <td>{{ $event->event_date }}</td>
-                                    <td><span class="badge bg-success">Published</span></td>
+                                    <td>
+                                        @if(\Carbon\Carbon::parse($event->event_date)->isFuture())
+                                        <span class="badge bg-success">Upcoming</span>
+                                        @else
+                                        <span class="badge bg-secondary">Passed</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <button type="button"
                                             class="btn btn-sm btn-outline-primary open-edit-modal"
@@ -418,7 +435,7 @@
                     <p>Manage admission applications and requirements.</p>
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#admissionListModal">
-                            View Accepted / Rejected Admissions  
+                            View Accepted / Rejected Admissions
                         </button>
                     </div>
 
