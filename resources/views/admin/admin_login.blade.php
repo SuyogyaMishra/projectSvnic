@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Bright Future Academy</title>
+    <title>Admin Login - Swami Vivekanand Inter College</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
 </head>
@@ -15,7 +15,7 @@
                     <div class="card-body p-5">
                         <div class="text-center mb-4">
                             <i class="bi bi-mortarboard-fill text-primary display-4 mb-3"></i>
-                            <h3 class="fw-bold text-primary">Bright Future Academy</h3>
+                            <h3 class="fw-bold text-primary">Swami Vivekanand Inter College</h3>
                             <p class="text-muted">Admin Panel Login</p>
                         </div>
                         
