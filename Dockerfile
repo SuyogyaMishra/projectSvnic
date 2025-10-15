@@ -24,7 +24,7 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Generate application key
-RUN php artisan key:generate
+
 
 # Expose port 80
 EXPOSE 80
