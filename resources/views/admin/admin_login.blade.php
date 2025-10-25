@@ -19,14 +19,15 @@
                             <p class="text-muted">Admin Panel Login</p>
                         </div>
                         
-                        <form id="adminLoginForm">
+                        <form id="adminLoginForm" method="post" action="{{ route('auth.login') }}">
+                            @csrf
                             <div class="mb-3">
-                                <label for="username" class="form-label fw-semibold">Username</label>
+                                <label for="username" class="form-label fw-semibold">Email</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0">
                                         <i class="bi bi-person-fill text-muted"></i>
                                     </span>
-                                    <input type="text" class="form-control border-start-0 ps-0" id="username" required>
+                                    <input type="email" class="form-control border-start-0 ps-0" id="username" name="email" required>
                                 </div>
                             </div>
                             
@@ -36,7 +37,7 @@
                                     <span class="input-group-text bg-light border-end-0">
                                         <i class="bi bi-lock-fill text-muted"></i>
                                     </span>
-                                    <input type="password" class="form-control border-start-0 ps-0" id="password" required>
+                                    <input type="password" class="form-control border-start-0 ps-0" id="password" name="password" required>
                                     <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                         <i class="bi bi-eye-fill"></i>
                                     </button>
@@ -78,7 +79,7 @@
                             <i class="bi bi-info-circle-fill me-2"></i>
                             Demo Credentials
                         </h6>
-                        <p class="card-text small mb-2"><strong>Username:</strong> admin</p>
+                        <p class="card-text small mb-2"><strong>Username</strong> admin</p>
                         <p class="card-text small mb-0"><strong>Password:</strong> admin123</p>
                     </div>
                 </div>
@@ -99,47 +100,6 @@
             } else {
                 passwordInput.type = 'password';
                 icon.className = 'bi bi-eye-fill';
-            }
-        });
-
-        // Handle form submission
-        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // Simple demo authentication
-            if (username === 'admin' && password === 'admin123') {
-                // Store login status
-                localStorage.setItem('adminLoggedIn', 'true');
-                localStorage.setItem('adminUsername', username);
-                
-                // Show success message
-                const alert = document.createElement('div');
-                alert.className = 'alert alert-success mt-3';
-                alert.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>Login successful! Redirecting...';
-                document.querySelector('.card-body').appendChild(alert);
-                
-                // Redirect to admin dashboard
-                setTimeout(() => {
-                    window.location.href = 'admin_dashboard';
-                }, 1500);
-            } else {
-                // Show error message
-                const existingAlert = document.querySelector('.alert');
-                if (existingAlert) {
-                    existingAlert.remove();
-                }
-                
-                const alert = document.createElement('div');
-                alert.className = 'alert alert-danger mt-3';
-                alert.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i>Invalid username or password!';
-                document.querySelector('.card-body').appendChild(alert);
-                
-                // Clear form
-                document.getElementById('username').value = '';
-                document.getElementById('password').value = '';
             }
         });
 

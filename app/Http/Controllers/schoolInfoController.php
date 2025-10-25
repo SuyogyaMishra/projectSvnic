@@ -8,24 +8,30 @@ use App\Models\Event;
 use App\Models\Contact;
 use App\Models\WebContent;
 use App\Models\Admission;
+use App\Models\Student;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
+
+use  Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+
 class SchoolInfoController extends Controller
 {
     /**
      * Show the form page.
      */
-   public function index()
-{
-    // Example: Homepage stats (your web_content table)
-    $stats = SchoolInfo::first();
+    public function index()
+    {
+        // Example: Homepage stats (your web_content table)
+        $stats = SchoolInfo::first();
 
-    // Example: Events (your events table with file relation)
-    $events = Event::with('file')->latest()->get();
+        // Example: Events (your events table with file relation)
+        $events = Event::with('file')->latest()->get();
 
-
-    // Pass both to the view
-    return view('home', compact('stats', 'events'));
-}
+        // Pass both to the view
+        return view('home', compact('stats', 'events'));
+    }
 
 
 
@@ -45,8 +51,8 @@ class SchoolInfoController extends Controller
 
         return back()->with('success', "Saved: {$request->students} students and {$request->teachers} teachers.");
     }
-     public function contactDetails(Request $request)
-    {      
+    public function contactDetails(Request $request)
+    {
         // ✅ Validation
         $request->validate([
             'name'    => 'required|string|max:255',
@@ -63,7 +69,7 @@ class SchoolInfoController extends Controller
             'message' => $request->input('message'),
         ]);
 
-        return redirect()->back()->with('success', 'Your message has been sent successfully!');
+        return redirect()->back()->with('msg', 'Your message has been sent successfully!');
     }
     public function edit($id)
     {
@@ -71,12 +77,13 @@ class SchoolInfoController extends Controller
         return view('admin.edit_admin', compact('event'));
     }
     public function showMessage($id)
-    {   Contact::where('id', $id)->update(['status' => 2]); // Mark as read
+    {
+        Contact::where('id', $id)->update(['status' => 2]); // Mark as read
         $contacts = Contact::findOrFail($id);
         return view('admin.show_contact', compact('contacts'));
     }
     public function admissionRecord(Request $request)
-    {   
+    {
         $validator = Validator::make($request->all(), [
             'full_name'     => 'required|string|max:255',
             'email'         => 'required|email|unique:admissions_table,email',
@@ -88,25 +95,27 @@ class SchoolInfoController extends Controller
             'address'       => 'required|string|max:1000',
         ]);
 
-       if ($validator->fails()) {
-    return redirect()->back()
-        ->withErrors($validator)   // ✅ best practice
-        ->withInput();
-}
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)   // ✅ best practice
+                ->withInput();
+        }
 
         $validated = $validator->validated();
 
-        
+
 
         $admission = Admission::create($validated);
 
         return redirect()->back()->with(['msg' => 'Admission Request Submitted Successfully!']);
     }
-    public function admissionView($id){
+    public function admissionView($id)
+    {
         $admission = Admission::findOrFail($id);
-        return view('admin.admin_admission',compact('admission'));
+        return view('admin.admin_admission', compact('admission'));
     }
-    public function admissionUpdate(Request $request){
+    public function admissionUpdate(Request $request)
+    {
         $request->validate([
             'admission_id' => 'required|exists:admissions_table,id',
             'status' => 'required|in:1,2,3,4', // Assuming status can be 1, 2, 3, or 4
@@ -118,9 +127,19 @@ class SchoolInfoController extends Controller
 
         return redirect()->back()->with('success', 'Admission status updated successfully.');
     }
-    public function finalAdmissionstatus(){
+    public function finalAdmissionstatus()
+    {
         $admissions = Admission::whereIn('status', [3, 4])->get();
-        return view('admin.final_admission',compact('admissions'));
+        return view('admin.final_admission', compact('admissions'));
     }
 
+    public function getMarksForm()
+    {
+        $email = Auth::user()->email;
+        $student =  Student::where('email', $email)->with('marks')->first();
+        return view('marksheet', compact('student'));
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
+            ->loadView('marksheet_pdf', ['student' => $student]);
+        return $pdf->stream('marksheet.pdf');
+    }
 }
