@@ -138,8 +138,12 @@ class SchoolInfoController extends Controller
         $email = Auth::user()->email;
         $student =  Student::where('email', $email)->with('marks')->first();
         return view('marksheet', compact('student'));
-        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
-            ->loadView('marksheet_pdf', ['student' => $student]);
-        return $pdf->stream('marksheet.pdf');
+    }
+    public function gettc()
+    {
+        $email = Auth::user()->email;
+        $student =  Student::where('email', $email)->first();
+        return view('tc_certificate', compact('student'));
     }
 }
+

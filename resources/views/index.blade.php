@@ -1,38 +1,62 @@
 @extends('layouts.app');
 @section('title', 'Home | SVNIC')
 @section('content')
-<section id="home" class="hero-section">
-
-    <div class="container">
+<section id="home" class="hero-section position-relative overflow-hidden py-5 py-lg-0">
+    <div class="container position-relative">
         <div class="row min-vh-100 align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-4 fw-bold text-primary mb-4">{{ $content->HeroTitle }}</h1>
-                <p class="lead mb-4">{{ $content->Hero_Description  }}</p>
-                <div class="d-flex flex-wrap gap-3">
-                    <a href="#admissions" class="btn btn-primary btn-lg">Apply Now</a>
-                    <a href="#about" class="btn btn-outline-primary btn-lg">Learn More</a>
+            <!-- Left Content -->
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h1 class="display-4 fw-bold text-primary mb-3">
+                    {{ $content->HeroTitle }}
+                </h1>
+                <p class="lead text-muted mb-4">
+                    {{ $content->Hero_Description }}
+                </p>
+
+                <div class="d-flex flex-wrap gap-3 mb-5">
+                    <a href="#admissions" class="btn btn-primary btn-lg px-4 shadow-sm hover-translate">
+                        Apply Now
+                    </a>
+                    <a href="#about" class="btn btn-outline-primary btn-lg px-4 shadow-sm hover-translate">
+                        Learn More
+                    </a>
                 </div>
-                <div class="mt-4 d-flex align-items-center">
-                    <div class="me-4">
-                        <h5 class="fw-bold text-primary mb-0">{{ $content->Years }}</h5>
-                        <small class="text-muted">Years of Excellence</small>
+
+                <div class="d-flex flex-wrap gap-4">
+                    <div class="text-center">
+                        <h3 class="fw-bold text-primary mb-0">{{ $content->Years }}</h3>
+                        <small class="text-muted text-uppercase">Years of Excellence</small>
                     </div>
-                    <div class="me-4">
-                        <h5 class="fw-bold text-primary mb-0">{{ $content->Student }}+</h5>
-                        <small class="text-muted">Happy Students</small>
+                    <div class="text-center">
+                        <h3 class="fw-bold text-primary mb-0">{{ $content->Student }}+</h3>
+                        <small class="text-muted text-uppercase">Happy Students</small>
                     </div>
-                    <div>
-                        <h5 class="fw-bold text-primary mb-0">{{ $content->Success }}</h5>
-                        <small class="text-muted">University Acceptance</small>
+                    <div class="text-center">
+                        <h3 class="fw-bold text-primary mb-0">{{ $content->Success }}</h3>
+                        <small class="text-muted text-uppercase">University Acceptance</small>
                     </div>
                 </div>
             </div>
+
+            <!-- Right Image -->
             <div class="col-lg-6 text-center">
-                <img src="{{ asset('storage/' . $content->schoolPic) }}" alt="School Building" class="img-fluid rounded-3 shadow">
+                <div class="position-relative">
+                    <img
+                        src="{{ asset('storage/' . $content->schoolPic) }}"
+                        alt="School Building"
+                        class="img-fluid rounded-4 shadow-lg hero-img animate-float"
+                        style="width: 100%; max-width: 700px; height: 500px; object-fit: cover; object-position: center;" <!-- Decorative Shape Overlay -->
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Subtle Background Pattern -->
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-light opacity-25"
+        style="background: radial-gradient(circle at 30% 30%, rgba(0,123,255,0.1), transparent 70%); z-index: -1;">
+    </div>
 </section>
+
 
 <!-- About Section -->
 <section id="about" class="py-5 bg-light">
@@ -112,7 +136,7 @@
                             <li><i class="bi bi-check-circle text-success me-2"></i>Music & Movement</li>
                             <li><i class="bi bi-check-circle text-success me-2"></i>Language Development</li>
                         </ul>
-                         <a href="earlychild" class="btn btn-primary">More</a>
+                        <a href="earlychild" class="btn btn-primary">More</a>
                     </div>
                 </div>
             </div>
@@ -462,101 +486,101 @@
 @endsection
 @section('script')
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
 
-    // Open admission form via AJAX
-    $(document).on('click', '.open-admission-form', function() {
-        $.ajax({
-            url: '{{ route("showform") }}',
-            type: 'GET',
-            success: function(response) {
-                $('#admissionModalContent').html(response);
+        // Open admission form via AJAX
+        $(document).on('click', '.open-admission-form', function() {
+            $.ajax({
+                url: '{{ route("showform") }}',
+                type: 'GET',
+                success: function(response) {
+                    $('#admissionModalContent').html(response);
 
-                // Show modal
-                var admissionModalEl = document.getElementById('admissionModal');
-                var modal = bootstrap.Modal.getOrCreateInstance(admissionModalEl);
-                modal.show();
+                    // Show modal
+                    var admissionModalEl = document.getElementById('admissionModal');
+                    var modal = bootstrap.Modal.getOrCreateInstance(admissionModalEl);
+                    modal.show();
 
-                // Initialize JS for dynamically loaded form
-                initAdmissionFormJS();
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error('Admission form load error:', textStatus, errorThrown);
-                $('#admissionModalContent').html(
-                    '<div class="alert alert-danger" role="alert">' +
-                    'Sorry, we could not load the admission form at this time. Please try again later.' +
-                    '</div>'
-                );
-            }
-        });
-    });
-
-    function initAdmissionFormJS() {
-        const classSelect = document.getElementById("classSelect");
-        const genderRadios = document.querySelectorAll("input[name='gender']");
-        const streamGroup = document.getElementById("streamGroup");
-        const streamSelect = document.getElementById("stream");
-        const form = document.getElementById("admissionForm");
-
-        const STREAMS = {
-            "9-10": {
-                Male: ["Math"],
-                Female: ["Math", "Home Science"],
-                Default: ["Math", "Home Science"]
-            },
-            "11-12": {
-                Default: ["Science", "Commerce", "Arts"]
-            }
-        };
-
-        function updateStreamField() {
-            const selectedClass = classSelect.value;
-            const selectedGender = document.querySelector("input[name='gender']:checked")?.value;
-
-            streamSelect.innerHTML = '<option selected disabled value="">Select Stream</option>';
-
-            if (!selectedClass || selectedClass === "1-8") {
-                streamGroup.style.display = "none";
-                streamSelect.required = false;
-                return;
-            }
-
-            streamGroup.style.display = "block";
-            streamSelect.required = true;
-
-            let options = [];
-
-            if (selectedClass === "9-10") {
-                options = STREAMS["9-10"][selectedGender] || STREAMS["9-10"].Default;
-            } else if (selectedClass === "11-12") {
-                options = STREAMS["11-12"].Default;
-            }
-
-            options.forEach(opt => {
-                const optionEl = document.createElement("option");
-                optionEl.textContent = opt;
-                optionEl.value = opt;
-                streamSelect.appendChild(optionEl);
+                    // Initialize JS for dynamically loaded form
+                    initAdmissionFormJS();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Admission form load error:', textStatus, errorThrown);
+                    $('#admissionModalContent').html(
+                        '<div class="alert alert-danger" role="alert">' +
+                        'Sorry, we could not load the admission form at this time. Please try again later.' +
+                        '</div>'
+                    );
+                }
             });
-        }
-
-        // Attach event listeners
-        classSelect.addEventListener("change", updateStreamField);
-        genderRadios.forEach(radio => radio.addEventListener("change", updateStreamField));
-
-        // Form validation
-        form.addEventListener("submit", function(e) {
-            if (!this.checkValidity()) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            this.classList.add("was-validated");
         });
 
-        // Initialize fields
-        updateStreamField();
-    }
-});
+        function initAdmissionFormJS() {
+            const classSelect = document.getElementById("classSelect");
+            const genderRadios = document.querySelectorAll("input[name='gender']");
+            const streamGroup = document.getElementById("streamGroup");
+            const streamSelect = document.getElementById("stream");
+            const form = document.getElementById("admissionForm");
+
+            const STREAMS = {
+                "9-10": {
+                    Male: ["Math"],
+                    Female: ["Math", "Home Science"],
+                    Default: ["Math", "Home Science"]
+                },
+                "11-12": {
+                    Default: ["Science", "Commerce", "Arts"]
+                }
+            };
+
+            function updateStreamField() {
+                const selectedClass = classSelect.value;
+                const selectedGender = document.querySelector("input[name='gender']:checked")?.value;
+
+                streamSelect.innerHTML = '<option selected disabled value="">Select Stream</option>';
+
+                if (!selectedClass || selectedClass === "1-8") {
+                    streamGroup.style.display = "none";
+                    streamSelect.required = false;
+                    return;
+                }
+
+                streamGroup.style.display = "block";
+                streamSelect.required = true;
+
+                let options = [];
+
+                if (selectedClass === "9-10") {
+                    options = STREAMS["9-10"][selectedGender] || STREAMS["9-10"].Default;
+                } else if (selectedClass === "11-12") {
+                    options = STREAMS["11-12"].Default;
+                }
+
+                options.forEach(opt => {
+                    const optionEl = document.createElement("option");
+                    optionEl.textContent = opt;
+                    optionEl.value = opt;
+                    streamSelect.appendChild(optionEl);
+                });
+            }
+
+            // Attach event listeners
+            classSelect.addEventListener("change", updateStreamField);
+            genderRadios.forEach(radio => radio.addEventListener("change", updateStreamField));
+
+            // Form validation
+            form.addEventListener("submit", function(e) {
+                if (!this.checkValidity()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                this.classList.add("was-validated");
+            });
+
+            // Initialize fields
+            updateStreamField();
+        }
+    });
 </script>
 
 

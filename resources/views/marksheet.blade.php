@@ -205,6 +205,7 @@
 
       </tbody>
     </table>
+    <h3 style="text-decoration-color: #b30000; color:#b30000"> *This is demo marksheet and for demo purpose*</h3>
 
     @php
     $grandTotal = $student->marks->sum('score');
@@ -220,7 +221,7 @@
     <div class="mt-4">
       <p><strong>Class Teacher's Remarks:</strong> {{ $student->remark??' ' }}</p>
       <p><strong>Promoted to Class:</strong> <b> {{ $student->class +1  }} </b> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; <strong>Place:</strong> S V N I C , Ikauna </p>
-      <p><strong>Date:</strong> {{ now()->format('d-m-Y') }}</p>
+      <!-- <p><strong>Date:</strong> {{ now()->format('d-m-Y') }}</p> -->
     </div>
 
     <div class="row sign text-center">

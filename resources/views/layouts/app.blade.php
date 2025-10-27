@@ -135,9 +135,9 @@
                             Student Corner
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="studentDropdown">
-                            <li><a class="dropdown-item" href="#fees">Fees</a></li>
+                            <li><a class="dropdown-item" href="{{ route('create.order') }}">Fees</a></li>
                             <li><a class="dropdown-item" href="{{ route('marks') }}">Marks</a></li>
-                            <li><a class="dropdown-item" href="#tc">TC Apply</a></li>
+                            <li><a class="dropdown-item" href="{{ route('gettc') }}">TC Apply</a></li>
                         </ul>
                     </li>
                     @auth

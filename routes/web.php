@@ -7,6 +7,7 @@ use App\Http\Controllers\webContentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\authController;
 use App\Models\SchoolInfo;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/login_form', function () {
     return view('login');
@@ -79,4 +80,7 @@ Route::middleware('admin')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     Route::get('/marks', [SchoolInfoController::class, 'getMarksForm'])->name('marks');
+    Route::get('/gettc', [SchoolInfoController::class, 'gettc'])->name('gettc');
 });
+Route::get('/order', [PaymentController::class, 'createOrder'])->name('create.order');
+Route::post('/verify-payment', [PaymentController::class, 'verifyPayment'])->name('verify.payment');
