@@ -87,7 +87,7 @@ Open phpMyAdmin
 
 Create a database named svnic_db
 
-Import the provided SQL file ("database\svnic.sql")
+Import the provided SQL file ("database/svnic.sql")
 
 6. Run the Project
 php artisan serve
@@ -97,29 +97,29 @@ Visit the site at:
 👉 http://127.0.0.1:8000
 
 📸 Screenshots
-(C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-27 230025.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143407.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143425.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143445.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143512.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143537.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143552.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143636.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143651.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143706.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143826.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143849.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143919.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143938.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144043.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144058.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144116.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144132.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144154.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144214.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144223.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144238.png) 
-![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144246.png) 
+(public/images/screenshots/Screenshot 2025-10-27 230025.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143407.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143425.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143445.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143512.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143537.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143552.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143636.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143651.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143706.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143826.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143849.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143919.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 143938.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 144043.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 144058.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 144116.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 144132.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 144154.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 144214.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 144223.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 144238.png) 
+![Screenshot](public/images/screenshots/Screenshot 2025-10-28 144246.png) 
 
 
 
