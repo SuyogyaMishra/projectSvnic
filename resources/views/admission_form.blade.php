@@ -43,15 +43,6 @@
 
 <body>
 
-
-  <div class="modal-header d-flex justify-content-between align-items-center">
-    <h5 class="modal-title text-black text-center flex-grow-1">
-      🌟 SVNIC - Where Learning Begins and Dreams Take Flight
-    </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-
-
   <!-- Modal Body -->
   <div class="modal-body">
     <div class="card-body px-4 py-3">
@@ -131,7 +122,6 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    console.log("ru")
     const classSelect = document.getElementById("classSelect");
     const genderRadios = document.querySelectorAll("input[name='gender']");
     const streamGroup = document.getElementById("streamGroup");

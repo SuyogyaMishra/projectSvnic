@@ -1,7 +1,4 @@
-<div class="modal-header">
-  <h5 class="modal-title">Sign Up</h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-</div>
+
 <div class="modal-body">
   <form method="POST" action="{{ route('auth.register') }}" id="registrationForm">
     @csrf

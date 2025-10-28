@@ -16,7 +16,7 @@ class AdminMiddleware
 
         // Only allow logged-in users with role = 1 (admin)
         if (!$auth->check() || $auth->user()->role != 2) {
-            return redirect('/login-form'); // or abort(403)
+            return redirect('/admin_login_form'); // or abort(403)
         }
 
         return $next($request);

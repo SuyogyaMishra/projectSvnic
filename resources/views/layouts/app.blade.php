@@ -135,25 +135,38 @@
                             Student Corner
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="studentDropdown">
+                            @auth
                             <li><a class="dropdown-item" href="{{ route('create.order') }}">Fees</a></li>
                             <li><a class="dropdown-item" href="{{ route('marks') }}">Marks</a></li>
                             <li><a class="dropdown-item" href="{{ route('gettc') }}">TC Apply</a></li>
+                            @else
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#studentLoginModal">Fees</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#studentLoginModal">Marks</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#studentLoginModal">TC Apply</a></li>
+                            @endauth
+
                         </ul>
                     </li>
                     @auth
-                    <!-- Show this if user is logged in -->
-                    <li class="nav-item ms-3">
-                        <a href="#" class="profile-link">
-                            <div class="profile-container d-flex align-items-center">
-                                <div class="profile-pic me-2">
-                                    <img src="{{ asset('images/image.png') }}" alt="Profile Picture" style="width:40px; height:40px; border-radius:50%;">
-                                </div>
-                                <div class="profile-name">{{ Auth::user()->name }}</div>
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="profile-pic me-2">
+                                <img src="{{ asset('images/image.png') }}" alt="Profile Picture" style="width:40px; height:40px; border-radius:50%;">
                             </div>
+                            <span>{{ Auth::user()->name }}</span>
                         </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item text-danger btn  " href="{{ route('logout') }}">Logout </a>
+
+                            </li>
+                        </ul>
                     </li>
                     @endauth
-
                     @guest
                     <li class="nav-item dropdown">
                         <button class="btn btn-outline-primary dropdown-toggle me-2" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -259,17 +272,6 @@
             </div>
         </div>
     </footer>
-    <!-- Student Login Modal -->
-    <div class="modal fade" id="studentLoginModal" tabindex="-1" aria-labelledby="studentLoginLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="modal-body">
-                    {{-- Student login form here --}}
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Admin Login Modal -->
     <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginLabel" aria-hidden="true">
@@ -285,51 +287,26 @@
             </div>
         </div>
     </div>
+    {!! render_modal(
+    'studentLoginModal',
+    'SVNIC Student Login',
+    view('login')->render(),
+    'lg'
+    ) !!}
 
-    <!-- ✅ Signup Modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" id="signupModalContent">
-                <!-- AJAX-loaded Signup form will go here -->
-            </div>
-        </div>
-    </div>
+
+
+    {!! render_modal(
+    'signupModal',
+    'SVNIC Sign Up',
+    view('signup')->render(),
+    'lg'
+    ) !!}
+
     <!-- JS -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const loadModal = (modalId, url) => {
-                const modal = document.getElementById(modalId);
-                if (!modal) return;
 
-                modal.addEventListener("show.bs.modal", function() {
-                    const content = modal.querySelector(".modal-content");
-
-                    // Avoid re-fetching if already loaded once
-                    if (!content.dataset.loaded) {
-                        fetch(url)
-                            .then(res => res.text())
-                            .then(html => {
-                                content.innerHTML = html;
-                                content.dataset.loaded = "true";
-                            })
-                            .catch(err => {
-                                content.innerHTML = `<div class="p-3 text-danger">Failed to load modal content.</div>`;
-                                console.error(err);
-                            });
-                    }
-                });
-            };
-
-            // Student & Admin modals
-            loadModal("studentLoginModal", "/login_form");
-            loadModal("adminLoginModal", "/admin_login_form");
-
-            // Signup modal (shared or separate depending on your structure)
-            loadModal("signupModal", "/signup-form");
-        });
-    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const modal = document.getElementById('signupModal');

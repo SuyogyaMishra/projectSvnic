@@ -13,7 +13,7 @@
             height: 100vh;
         }
         .card {
-            max-width: 500px;
+            max-width: 500px; 
             border: none;
             border-radius: 16px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);

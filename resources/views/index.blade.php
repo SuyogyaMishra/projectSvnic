@@ -473,13 +473,16 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="admissionModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" id="admissionModalContent">
-                <!-- AJAX-loaded form will go here -->
-            </div>
-        </div>
-    </div>
+
+
+    {!! render_modal(
+    'admissionModal',
+    ' 🌟 SVNIC - Where Learning Begins and Dreams Take Flight',
+    view('admission_form')->render(),
+    'lg'
+    ) !!}
+
+
 
 </section>
 
@@ -487,34 +490,7 @@
 @section('script')
 <script>
     $(document).ready(function() {
-
-        // Open admission form via AJAX
-        $(document).on('click', '.open-admission-form', function() {
-            $.ajax({
-                url: '{{ route("showform") }}',
-                type: 'GET',
-                success: function(response) {
-                    $('#admissionModalContent').html(response);
-
-                    // Show modal
-                    var admissionModalEl = document.getElementById('admissionModal');
-                    var modal = bootstrap.Modal.getOrCreateInstance(admissionModalEl);
-                    modal.show();
-
-                    // Initialize JS for dynamically loaded form
-                    initAdmissionFormJS();
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.error('Admission form load error:', textStatus, errorThrown);
-                    $('#admissionModalContent').html(
-                        '<div class="alert alert-danger" role="alert">' +
-                        'Sorry, we could not load the admission form at this time. Please try again later.' +
-                        '</div>'
-                    );
-                }
-            });
-        });
-
+      
         function initAdmissionFormJS() {
             const classSelect = document.getElementById("classSelect");
             const genderRadios = document.querySelectorAll("input[name='gender']");

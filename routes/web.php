@@ -20,13 +20,13 @@ Route::get('/signup-form', function () {
     return view('signup');
 });
 Route::post('/register', [authController::class, 'register'])->name('auth.register');
-Route::post('/login', [authController::class, 'login'])->name('auth.login');
+Route::post('/login_form', [authController::class, 'login'])->name('auth.login');
 // Admin Dashboard
 Route::get('adminlogin', function () {
     return view('admin.admin_login');
 });
 Route::get('/', [WebContentController::class, 'index'])->name('home');
-Route::get('/logout',[authController::class, 'logout'])->name('logout');
+Route::get('/logout', [authController::class, 'logout'])->name('logout');
 
 
 Route::get('earlychild', function () {
@@ -76,11 +76,10 @@ Route::middleware('admin')->group(function () {
     Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
     Route::get('/contacts/{id}/view', [SchoolInfoController::class, 'showMessage'])->name('contacts.view');
     Route::post('/uploadmark', [AdmindasboardController::class, 'uplodMark'])->name('admin.uploadmark');
-
 });
 Route::middleware('auth')->group(function () {
     Route::get('/marks', [SchoolInfoController::class, 'getMarksForm'])->name('marks');
     Route::get('/gettc', [SchoolInfoController::class, 'gettc'])->name('gettc');
+    Route::get('/order', [PaymentController::class, 'createOrder'])->name('create.order');
+    Route::post('/verify-payment', [PaymentController::class, 'verifyPayment'])->name('verify.payment');
 });
-Route::get('/order', [PaymentController::class, 'createOrder'])->name('create.order');
-Route::post('/verify-payment', [PaymentController::class, 'verifyPayment'])->name('verify.payment');
