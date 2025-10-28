@@ -98,31 +98,6 @@ Visit the site at:
 
 📸 Screenshots
 (public/images/screenshots/Screenshot 2025-10-27 230025.png) 
-## 📸 Screenshots
-
-![Screenshot](public/images/screenshots/Screenshot%202025-10-27%20230025.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143407.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143425.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143445.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143512.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143537.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143552.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143636.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143651.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143706.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143826.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143849.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143919.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20143938.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20144043.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20144058.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20144116.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20144132.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20144154.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20144214.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20144223.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20144238.png)
-![Screenshot](public/images/screenshots/Screenshot%202025-10-28%20144246.png)
 
 
 
@@ -163,4 +138,5 @@ Contact: suyogyamishr@gmail.com || 6386369558
 
 ⭐ Show Your Support
 
-If you like this project, give it a ⭐ on GitHub to show your support!![Screenshot]
+If you like this project, give it a ⭐ on GitHub to show your support
+![Screenshot](./public/images/screenshots/Screenshot_2025-10-28_143407.png) 
