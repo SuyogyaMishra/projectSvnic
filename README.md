@@ -1,65 +1,163 @@
-<<<<<<< HEAD
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏫 ProjectSVNIC - School Website
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**ProjectSVNIC** is a fully responsive and dynamic school website developed for *SVNIC School*.  
+It provides an easy-to-use platform for managing school information, displaying announcements, and offering students, teachers, and administrators a unified online system.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🌐 Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This website is designed to present the school’s profile, academic programs, notices, and gallery ,while integrating an **admin dashboard** for content management.  
+It is built using modern web technologies for speed, security, and scalability.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ⚙️ Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 👩‍🏫 Public Section
+- Home page with dynamic banners and school overview  
+- About page with school information and mission  
+- Notice board / announcements  
+- Image gallery with responsive grid layout  
+- Contact form with email integration  
+- Fully responsive UI (mobile-friendly design)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 🧑‍💼 Admin Panel
+- Secure login system for admin users  
+- Dashboard overview with key statistics  
+- CRUD operations for:
+  - Students
+  - Teachers
+  - Events / Announcements
+  - Gallery images  
+- Manage website content dynamically (no hard-coded data)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🧠 Additional Features
+- Laravel Blade templating for dynamic rendering  
+- Validation and error handling  
+- CSRF-protected forms  
+- User authentication using Laravel Auth  
+- Activity logging for admin actions
+- Role Based Access
+- Payment Intigration (RazorPay)
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Tech Stack
 
-### Premium Partners
+| Component        | Technology Used       |
+|------------------|----------------------|
+| Frontend         | HTML5, CSS3, Bootstrap 5, JavaScript |
+| Backend          | PHP (Laravel Framework) |
+| Database         | MySQL |
+| Server           | Apache / XAMPP / Laragon |
+| Version Control  | Git & GitHub |
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## 🚀 Installation & Setup Guide
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Follow these steps to run the project locally:
 
-## Code of Conduct
+### 1. Clone the Repository
+```bash
+git clone https://github.com/SuyogyaMishra/projectSVNIC.git
+cd projectSVNIC
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Install Dependencies
 
-## Security Vulnerabilities
+If using Laravel:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+composer install
 
-## License
+3. Set Up Environment File
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# projectSvnic
->>>>>>> 0e83e199fe47074d95adfda8d83b34902d0392ea
+Duplicate .env.example and rename it to .env, then update your database details:
+
+DB_DATABASE=svnic_db
+DB_USERNAME=root
+DB_PASSWORD=
+
+4. Generate Key
+php artisan key:generate
+
+5. Import Database
+
+Open phpMyAdmin
+
+Create a database named svnic_db
+
+Import the provided SQL file ("database\svnic.sql")
+
+6. Run the Project
+php artisan serve
+
+
+Visit the site at:
+👉 http://127.0.0.1:8000
+
+📸 Screenshots
+(C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-27 230025.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143407.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143425.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143445.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143512.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143537.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143552.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143636.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143651.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143706.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143826.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143849.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143919.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 143938.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144043.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144058.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144116.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144132.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144154.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144214.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144223.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144238.png) 
+![Screenshot](C:\xampp\htdocs\projectSvnic\public\images\screenshots\Screenshot 2025-10-28 144246.png) 
+
+
+
+📁 Project Structure
+projectSVNIC/
+│
+├── app/                # Laravel application files
+├── public/             # Public assets (CSS, JS, images)
+├── resources/
+│   ├── views/          # Blade templates
+│   ├── css/ js/        # Frontend resources
+├── routes/             # Web and API routes
+├── database/           # Migrations and SQL dumps
+├── .env.example
+├── composer.json
+├── package.json
+└── README.md
+
+👨‍💻 Developer
+
+Author: Suyogya Mishra
+
+Project: School Website (ProjectSVNIC)
+Role: Full Stack Developer (Laravel + Frontend)
+
+🧾 License
+
+This project is created for educational and academic purposes.
+Unauthorized commercial use is not permitted.
+
+💬 Feedback
+
+If you find any bugs or have suggestions, feel free to:
+
+Open an issue on GitHub
+
+Contact: suyogyamishr@gmail.com || 6386369558
+
+⭐ Show Your Support
+
+If you like this project, give it a ⭐ on GitHub to show your support!![Screenshot]
