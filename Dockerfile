@@ -20,13 +20,17 @@ COPY . .
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer install --no-dev --optimize-autoloader
 
-# Set permissions
+# Fix permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Create Laravel storage symlink
+RUN php artisan storage:link || true
+
+# Optimize Laravel cache
+RUN php artisan config:clear && php artisan cache:clear && php artisan config:cache && php artisan route:cache
 
 # Configure Apache to serve Laravel public directory
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
-
-# Allow .htaccess overrides (for routing)
 RUN sed -i 's|AllowOverride None|AllowOverride All|g' /etc/apache2/apache2.conf
 
 # Expose port 80
