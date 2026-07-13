@@ -69,7 +69,7 @@ class SchoolInfoController extends Controller
             'message' => $request->input('message'),
         ]);
 
-        return redirect()->back()->with('msg', 'Your message has been sent successfully!');
+        return redirect()->to('#contact')->with('msg', 'Your message has been sent successfully!');
     }
     public function edit($id)
     {

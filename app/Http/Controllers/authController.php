@@ -57,7 +57,6 @@ class AuthController extends Controller
                 'email' => 'required|string|email|max:255',
                 'password' => 'required|string|min:8',
             ]);
-
             // Attempt login
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();

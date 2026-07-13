@@ -175,7 +175,8 @@
         elseif ($percent >= 76) $grade = 'B';
         elseif ($percent >= 56) $grade = 'C';
         elseif ($percent >= 41) $grade = 'D';
-        else $grade = 'E';
+        elseif ($percent >= 33) $grade = 'E';
+        else $grade = 'F';
         if($mark->score < $minMark && $status==1){
           $status=0;
           }
@@ -220,7 +221,6 @@
 
     <div class="mt-4">
       <p><strong>Class Teacher's Remarks:</strong> {{ $student->remark??' ' }}</p>
-      <p><strong>Promoted to Class:</strong> <b> {{ $student->class +1  }} </b> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; <strong>Place:</strong> S V N I C , Ikauna </p>
       <!-- <p><strong>Date:</strong> {{ now()->format('d-m-Y') }}</p> -->
     </div>
 
@@ -263,6 +263,10 @@
               <td>41 - 55</td>
               <td>D</td>
             </tr>
+               <tr>
+              <td>33 - 41</td>
+              <td>E</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -276,8 +280,8 @@
           </thead>
           <tbody>
             <tr>
-              <td>Below 41</td>
-              <td>E</td>
+              <td>Below 33</td>
+              <td>F</td>
             </tr>
           </tbody>
         </table>
