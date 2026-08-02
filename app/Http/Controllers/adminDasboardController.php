@@ -92,7 +92,7 @@ class AdmindasboardController extends Controller
             'Vision_Statement'  => $request->input('vision'),
             'schoolPic'         => $imagePath,
         ];
-
+        
         if ($content) {
             $content->update($data);
         } else {

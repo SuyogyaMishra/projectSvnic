@@ -1,5 +1,41 @@
 @extends('layouts.app');
 @section('title', 'Home | SVNIC')
+@section('css')
+<style>
+:root{
+
+--primary:#0A4D8C;
+
+--secondary:#2B8AF7;
+
+--accent:#FFC107;
+
+--light:#F5F8FC;
+
+--dark:#1D2A35;
+
+--success:#00B894;
+
+--radius:18px;
+
+}
+body{
+
+font-family:'Poppins',sans-serif;
+
+background:#fff;
+
+color:#333;
+
+overflow-x:hidden;
+
+scroll-behavior:smooth;
+
+}
+
+</style>
+
+@endsection
 @section('content')
 <section id="home" class="hero-section position-relative overflow-hidden py-5 py-lg-0">
     <div class="container position-relative">

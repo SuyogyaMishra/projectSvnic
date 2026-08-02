@@ -17,6 +17,6 @@ class webContentController extends Controller
 
         return view('index', compact('content', 'events'));
     }
-
+    
 
 }
